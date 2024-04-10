@@ -30,3 +30,7 @@ body, html {
   width: 16%;
   flex-grow: 1;
 }
+
+video::-internal-media-controls-overlay-cast-button {
+  display: none;
+}
