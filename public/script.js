@@ -1,7 +1,4 @@
-import config from './config.json' with { type: "json" };
-
 const urlParams = new URLSearchParams(window.location.search);
-console.log(urlParams.get('debug'))
 const isDebugMode = urlParams.get('debug');
 
 const videoContainer = document.getElementById('videoContainer');
@@ -41,9 +38,14 @@ const setup = item => {
   })
 }
 
-config.settings.forEach(item => setup(item));
-videoTemplate.remove();
-buttonTemplate.remove();
+fetch('./config.json')
+  .then(response => response.json())
+  .then(data => data.settings.forEach(item => setup(item)))
+  .then(() => {
+    videoTemplate.remove();
+    buttonTemplate.remove();
+    
+    videoContainer.getElementsByTagName('video')[0].style.opacity = 1;
+    videoContainer.getElementsByTagName('video')[0].play();
+  })
 
-videoContainer.getElementsByTagName('video')[0].style.opacity = 1;
-videoContainer.getElementsByTagName('video')[0].play();
