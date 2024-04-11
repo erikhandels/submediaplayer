@@ -1,11 +1,49 @@
-document.getElementById('btn1').addEventListener('click', function() {
-  document.getElementById('video').src = 'NL.mp4';
-});
+import config from './config.json' with { type: "json" };
 
-document.getElementById('btn2').addEventListener('click', function() {
-  document.getElementById('video').src = 'DE.mp4';
-});
+const urlParams = new URLSearchParams(window.location.search);
+console.log(urlParams.get('debug'))
+const isDebugMode = urlParams.get('debug');
 
-document.getElementById('btn3').addEventListener('click', function() {
-  document.getElementById('video').src = 'EN.mp4';
-});
+const videoContainer = document.getElementById('videoContainer');
+const overlay = document.getElementById('overlay');
+const videoTemplate = document.getElementById('videoClone');
+const buttonTemplate = document.getElementById('buttonClone');
+const sourceTemplate = document.createElement("source");
+sourceTemplate.type = "video/mp4";
+
+const setup = item => {
+  const newSource = sourceTemplate.cloneNode();
+  newSource.src = item.video.source; //'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+
+  const newVideo = videoTemplate.cloneNode();
+  newVideo.id = item.video.id;
+  newVideo.appendChild(newSource);
+
+  const newButton = buttonTemplate.cloneNode();
+  newButton.id = item.button.id;
+  Object.assign(newButton.style, item.button.style);
+  if(isDebugMode !== null){
+    newButton.classList.add('debug')
+    newButton.innerHTML = `<div class="debugName">${item.button.id}</div>`;
+  }
+
+  videoContainer.append(newVideo);
+  overlay.append(newButton);
+
+  newButton.addEventListener('touchstart', (e) => {
+    document.querySelectorAll('.video').forEach(el => {
+      el.style.opacity = 0;
+      el.pause();
+      el.currentTime = 0;
+    })
+    newVideo.play();
+    newVideo.style.opacity = 1;
+  })
+}
+
+config.settings.forEach(item => setup(item));
+videoTemplate.remove();
+buttonTemplate.remove();
+
+videoContainer.getElementsByTagName('video')[0].style.opacity = 1;
+videoContainer.getElementsByTagName('video')[0].play();

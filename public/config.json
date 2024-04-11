@@ -1,0 +1,54 @@
+{
+  "name": "test",
+  "settings":[
+    {
+      "name": "NL",
+      "video" : {
+        "id": "video_nl",
+        "source": "Nl.mp4"
+      },
+      "button": {
+        "id": "button_nl",
+        "style": {
+          "width": "240px",
+          "height": "243px",
+          "left": "100px",
+          "top": "125px"
+        }
+      }
+    },
+    {
+      "name": "DE",
+      "video" : {
+        "id": "video_de",
+        "source": "De.mp4"
+      },
+      "button": {
+        "id": "button_de",
+        "style": {
+          "width": "240px",
+          "height": "243px",
+          "left": "100px",
+          "top": "408px"
+        }
+      }
+    },
+    {
+      "name": "EN",
+      "video" : {
+        "id": "video_en",
+        "source": "En.mp4"
+      },
+      "button": {
+        "id": "button_en",
+        "style": {
+          "width": "240px",
+          "height": "243px",
+          "left": "100px",
+          "top": "680px"
+        }
+      }
+    }
+  ]
+
+}
