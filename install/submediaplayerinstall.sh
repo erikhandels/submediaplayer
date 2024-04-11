@@ -14,7 +14,7 @@ sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart > /dev/null <<EOT
 @xset s off
 @xset -dpms
 @xset s noblank
-@chromium-browser --kiosk http://localhost:3000
+@chromium-browser --kiosk
 EOT
 
 echo "Edited autostart file"
