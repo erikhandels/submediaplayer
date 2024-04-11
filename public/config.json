@@ -10,10 +10,10 @@
       "button": {
         "id": "button_nl",
         "style": {
-          "width": "240px",
-          "height": "243px",
-          "left": "100px",
-          "top": "125px"
+          "width": "13%",
+          "height": "24%",
+          "left": "5%",
+          "top": "11%"
         }
       }
     },
@@ -26,10 +26,10 @@
       "button": {
         "id": "button_de",
         "style": {
-          "width": "240px",
-          "height": "243px",
-          "left": "100px",
-          "top": "408px"
+          "width": "13%",
+          "height": "24%",
+          "left": "5%",
+          "top": "37%"
         }
       }
     },
@@ -42,10 +42,10 @@
       "button": {
         "id": "button_en",
         "style": {
-          "width": "240px",
-          "height": "243px",
-          "left": "100px",
-          "top": "680px"
+          "width": "13%",
+          "height": "24%",
+          "left": "5%",
+          "top": "62%"
         }
       }
     }
