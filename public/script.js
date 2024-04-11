@@ -1,6 +1,3 @@
-const urlParams = new URLSearchParams(window.location.search);
-const isDebugMode = urlParams.get('debug');
-
 const videoContainer = document.getElementById('videoContainer');
 const overlay = document.getElementById('overlay');
 const videoTemplate = document.getElementById('videoClone');
@@ -19,7 +16,7 @@ const setup = item => {
   const newButton = buttonTemplate.cloneNode();
   newButton.id = item.button.id;
   Object.assign(newButton.style, item.button.style);
-  if(isDebugMode !== null){
+  if(window.location.search.includes('debug')){
     newButton.classList.add('debug')
     newButton.innerHTML = `<div class="debugName">${item.button.id}</div>`;
   }
