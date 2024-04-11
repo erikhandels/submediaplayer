@@ -9,7 +9,7 @@ npm install
 echo "Install complete"
 
 sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart > /dev/null <<EOT
-@node $PWD/submediaplayer/server.mjs
+@node $PWD/server.mjs
 @xscreensaver -no-splash
 @xset s off
 @xset -dpms
