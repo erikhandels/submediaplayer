@@ -5,7 +5,7 @@
       "name": "NL",
       "video" : {
         "id": "video_nl",
-        "source": "./Nl.mp4"
+        "source": "./NL.mp4"
       },
       "button": {
         "id": "button_nl",
@@ -21,7 +21,7 @@
       "name": "DE",
       "video" : {
         "id": "video_de",
-        "source": "./De.mp4"
+        "source": "./DE.mp4"
       },
       "button": {
         "id": "button_de",
@@ -37,7 +37,7 @@
       "name": "EN",
       "video" : {
         "id": "video_en",
-        "source": "./En.mp4"
+        "source": "./EN.mp4"
       },
       "button": {
         "id": "button_en",
