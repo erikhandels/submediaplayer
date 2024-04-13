@@ -8,7 +8,7 @@ cd submediaplayer
 npm install
 echo "Install complete"
 
-sed 's/#submediaplayer-start/*#submediaplayer-end//' /etc/xdg/lxsession/LXDE-pi/autostart
+sed 's/\#submediaplayer-start/*\#submediaplayer-end//' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart > /dev/null <<EOT
 
 #submediaplayer-start
