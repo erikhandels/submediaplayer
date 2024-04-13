@@ -1,17 +1,21 @@
 #!/bin/bash
-echo "Installing submediaplayer in $PWD/submediaplayer"
+echo -e "\033[32m Installing submediaplayer in $PWD/submediaplayer \033[m"
 curl https://deb.nodesource.com/setup_18.x | sudo bash
+echo -e "\033[32mInstalling Nodejs \033[m"
 sudo apt-get install nodejs -y
-sleep 10s
+
 rm -rf submediaplayer
-sleep 5s
+sleep 2s
+echo -e "\033[32m Cloning git repository \033[m"
 git clone https://github.com/erikhandels/submediaplayer.git
 cd submediaplayer
+echo -e "\033[32m Installing node packages \033[m"
 npm install
 
+echo -e "\033[32m Editing autostart file \033[m"
 sudo sed -i "/#submediaplayer-start/,/#submediaplayer-end/d" /etc/xdg/lxsession/LXDE-pi/autostart
-sleep 2s
-sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart > /dev/null <<EOT
+sleep 0.5s
+sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart <<EOT
 
 #submediaplayer-start
 @node $PWD/server.mjs
@@ -24,8 +28,7 @@ sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart > /dev/null <<EOT
 
 EOT
 
-echo "Edited autostart file"
-echo -e "\033[32mInstall complete\033[m"
-echo "Attempting to reboot..."
+echo -e "\033[32m Install complete \033[m"
+echo -e "\033[32m Attempting to reboot in 3 seconds \033[m"
 sleep 3s
-sudo reboot now > /dev/null
+sudo reboot now
