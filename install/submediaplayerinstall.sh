@@ -1,9 +1,8 @@
 #!/bin/bash
+echo "Installing submediaplayer in $PWD/submediaplayer"
 rm -rf submediaplayer
 sleep 5s
 git clone https://github.com/erikhandels/submediaplayer.git
-
-echo "Installing submediaplayer in $PWD/submediaplayer"
 cd submediaplayer
 npm install
 
