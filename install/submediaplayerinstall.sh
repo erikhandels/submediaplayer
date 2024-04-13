@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Check if nodejs is installed"
 dpkg -s nodejs 2>/dev/null >/dev/null || curl -sL https://deb.nodesource.com/setup_5.x | sudo bash - | apt-get install nodejs
+rm -rf submediaplayer
 git clone https://github.com/erikhandels/submediaplayer.git
 
 echo "Installing submediaplayer in $PWD/submediaplayer"
