@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Installing submediaplayer in $PWD/submediaplayer"
-curl -sL https://deb.nodesource.com/setup_18.x | sudo bash
+curl -sL https://deb.nodesource.com/setup_18.x
+sudo bash
 sleep 10s
 sudo apt-get install nodejs -y
 sleep 10s
