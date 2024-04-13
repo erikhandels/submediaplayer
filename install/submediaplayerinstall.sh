@@ -1,6 +1,9 @@
 #!/bin/bash
+echo "Update packages"
+sudo apt-get update > /dev/null
+sudo apt-get upgrade > /dev/null
 echo "Check if nodejs is installed"
-dpkg -s nodejs 2>/dev/null >/dev/null || curl -sL https://deb.nodesource.com/setup_5.x | sudo bash - > /dev/null | sudo apt-get install nodejs > /dev/null | sudo apt-get install npm > /dev/null
+dpkg -s nodejs 2>/dev/null >/dev/null || curl -sL https://deb.nodesource.com/setup_18.x | sudo bash - > /dev/null | sudo apt-get install nodejs > /dev/null | sudo apt-get install npm > /dev/null
 rm -rf submediaplayer
 sleep 5s
 git clone https://github.com/erikhandels/submediaplayer.git
