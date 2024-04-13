@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Check if nodejs is installed"
 curl -sL https://deb.nodesource.com/setup_18.x | sudo bash - > /dev/null
+sleep 5s
 sudo apt-get install nodejs -y > /dev/null
 
 rm -rf submediaplayer
