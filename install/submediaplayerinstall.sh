@@ -8,7 +8,7 @@ cd submediaplayer
 npm install
 echo "Install complete"
 
-sed 's/\#submediaplayer-start/*\#submediaplayer-end//' /etc/xdg/lxsession/LXDE-pi/autostart
+sudo sed -i "/#submediaplayer-start/,/#submediaplayer-end/d" /etc/xdg/lxsession/LXDE-pi/autostart
 sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart > /dev/null <<EOT
 
 #submediaplayer-start
@@ -24,5 +24,5 @@ EOT
 
 echo "Edited autostart file"
 echo ""
-echo -e "\033[32mPlease reboot the system to start submediaplayer\033[m"
+echo -e "\033[32mAttempting to reboot...\033[m"
 sudo reboot now > /dev/null
