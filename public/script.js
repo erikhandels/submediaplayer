@@ -16,7 +16,7 @@ const setup = item => {
   const newButton = buttonTemplate.cloneNode(true);
   newButton.id = item.button.id;
   Object.assign(newButton.style, item.button.style);
-  
+
   const saveButton = document.getElementById('saveButton')
   const escapeButton = document.getElementById('escapeButton')
 
@@ -86,13 +86,9 @@ const setup = item => {
     });
 
     saveButton.addEventListener('touchstart', function(event) {
-      
       console.log('save positions to JSON')
       let style = document.defaultView.getComputedStyle(newButton)
       let updatedValues = JSON.stringify({ "left": style.left, "right": style.top, "width": style.width, "height": style.height} )
-      console.log(updatedValues)
-
-      const data = { key: 'value' };
 
       fetch('/update', {
         method: 'POST',

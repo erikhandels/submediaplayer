@@ -8,8 +8,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     open('http://localhost:3000', { wait: false, fullscreen: true});
 });
+
+app.post('/update', (req, res) => {
+    console.log(req.body)
+    res.send({"status": "saved"})
+})
