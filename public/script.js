@@ -88,7 +88,7 @@ const setup = item => {
     saveButton.addEventListener('touchstart', function(event) {
       console.log('save positions to JSON')
       let style = document.defaultView.getComputedStyle(newButton)
-      let updatedValues = JSON.stringify({ "left": style.left, "right": style.top, "width": style.width, "height": style.height} )
+      let updatedValues = JSON.stringify({"id": newButton.id, "left": style.left, "right": style.top, "width": style.width, "height": style.height} )
 
       fetch('/update', {
         method: 'POST',
