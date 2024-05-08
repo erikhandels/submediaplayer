@@ -5,16 +5,17 @@ const buttonTemplate = document.getElementById('buttonClone');
 const sourceTemplate = document.createElement("source");
 sourceTemplate.type = "video/mp4";
 
-const setup = item => {
+const setup = (key, value, data) => {
+  const item = data[key]
   const newSource = sourceTemplate.cloneNode();
-  newSource.src = item.video.source; //'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+  newSource.src = item.video.source;
 
   const newVideo = videoTemplate.cloneNode();
   newVideo.id = item.video.id;
   newVideo.appendChild(newSource);
 
   const newButton = buttonTemplate.cloneNode(true);
-  newButton.id = item.button.id;
+  newButton.id = key;
   Object.assign(newButton.style, item.button.style);
 
   const saveButton = document.getElementById('saveButton')
@@ -22,7 +23,7 @@ const setup = item => {
 
   if(window.location.search.includes('debug')){
     newButton.classList.add('debug')
-    newButton.querySelector('.debugName').innerHTML = item.button.id;
+    newButton.querySelector('.debugName').innerHTML = key;
     
     const resizeElement = newButton.querySelector('.debugResize');
     const dragElement = newButton.querySelector('.dragArea')
@@ -85,33 +86,6 @@ const setup = item => {
         newButton.style.top = newY + 'px';
     });
 
-    saveButton.addEventListener('touchstart', function(event) {
-      console.log('save positions to JSON')
-      let style = document.defaultView.getComputedStyle(newButton)
-      let updatedValues = JSON.stringify({"id": newButton.id, "left": style.left, "right": style.top, "width": style.width, "height": style.height} )
-
-      fetch('/update', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: updatedValues
-      })
-      .then(response => response.json())
-      .then(response => console.log(response.status))
-      .catch(error => {
-        // Handle error
-      });
-
-      setTimeout(() => {
-        // window.location.href = window.location.origin
-      }, 1000);
-    })
-
-    escapeButton.addEventListener('touchstart', function(event) {
-      window.location.href = window.location.origin
-    })
-
   }else{
     newButton.innerHTML = '';
     if(saveButton){
@@ -138,11 +112,45 @@ const setup = item => {
 
 fetch('./config.json')
   .then(response => response.json())
-  .then(data => data.settings.forEach(item => setup(item)))
+  .then(data => Object.keys(data).forEach((key, value) => setup(key, value, data)))
   .then(() => {
     videoTemplate.remove();
     buttonTemplate.remove();
     
     videoContainer.getElementsByTagName('video')[0].style.opacity = 1;
     videoContainer.getElementsByTagName('video')[0].play();
+
+    
+    saveButton.addEventListener('touchstart', function(event) {
+      console.log('save positions to JSON')
+      let updatedValues = {}
+      document.querySelectorAll('.button').forEach(button => {
+        let style = document.defaultView.getComputedStyle(button)
+        updatedValues[button.id] = {"style": {"left": style.left, "top": style.top, "width": style.width, "height": style.height}}
+        
+      })
+
+      console.log(updatedValues)
+
+      fetch('/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedValues)
+      })
+      .then(response => response.json())
+      .then(response => console.log(response.status))
+      .catch(error => {
+        // Handle error
+      });
+
+      setTimeout(() => {
+        // window.location.href = window.location.origin
+      }, 1000);
+    })
+
+    escapeButton.addEventListener('touchstart', function(event) {
+      window.location.href = window.location.origin
+    })
   })
